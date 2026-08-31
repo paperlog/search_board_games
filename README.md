@@ -10,7 +10,7 @@
 - **id** (`str`): オブジェクトのキー
   - `title` (`str`): ゲームタイトル
   - `img_path` (`str`): 画像パス
-  - `genre` (`str`): ジャンル
+  - `genre` (`list[str]`): ジャンル
   - `min_players` (`int`): 最小人数
   - `max_players` (`int`): 最大人数
   - `min_play_time` (`int`): 最小プレイ時間
@@ -22,7 +22,7 @@
   "catan": {
     "title": "カタン",
     "img_path": "images/catan.jpg",
-    "genre": "ボードゲーム",
+    "genre": ["パズル","対戦"],
     "min_players": 3,
     "max_players": 4,
     "min_play_time": 60,
