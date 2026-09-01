@@ -1,0 +1,20 @@
+{
+    "catan": {
+	"title": "カタン",
+	"img_path": "images/catan.webp",
+	"genre": ["拡大再生産","交渉"],
+	"min_players": 3,
+	"max_players": 4,
+	"min_play_time": 60,
+	"max_play_time": 90
+    }
+    "lovecraft_letter": {
+	"title": "ラブクラフトレター",
+	"img_path": "images/lovecraft_letter.webp",
+	"genere": ["手札管理","推理"],
+	"min_players": 2,
+	"max_players": 6,
+	"min_play_time": 5,
+	"max_play_time": 15
+    }
+}
