@@ -11,7 +11,7 @@
     "lovecraft_letter": {
 	"title": "ラブクラフトレター",
 	"img_path": "images/lovecraft_letter.webp",
-	"genere": ["手札管理","推理"],
+	"genre": ["手札管理","推理"],
 	"min_players": 2,
 	"max_players": 6,
 	"min_play_time": 5,
