@@ -16,3 +16,10 @@ def load_data(path:str) -> dict[str, dict[str, Any]]:
     with open(path,"r",encoding="utf-8") as f:
         data=json.load(f)
     return data
+
+def write_data(path:str, add_id:str, add_data:dict[str, Any]) -> None:
+    """jsonファイルにデータを書き込む"""
+    data=load_data(path)
+    data[add_id]=add_data
+    with open(path,"w",encoding="utf-8") as f:
+        json.dump(data,f,ensure_ascii=False,indent=4)
