@@ -7,7 +7,7 @@
 	"max_players": 4,
 	"min_play_time": 60,
 	"max_play_time": 90
-    }
+    },
     "lovecraft_letter": {
 	"title": "ラブクラフトレター",
 	"img_path": "images/lovecraft_letter.webp",
