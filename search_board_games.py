@@ -9,3 +9,24 @@ Todo:
   - データの絞り込み
   - データの表示
 """
+import json
+from pathlib import Path
+
+def load_data(path:str) -> dict[str, dict[str, Any]]:
+    """jsonファイルからデータを読み込む
+    
+    Args:
+      path (str): jsonファイルへのパス
+    
+    Returns:
+      dict[str, dict[str, Any]]: jsonファイルのデータ
+    
+    Raises:
+      FileNotFoundError: jsonファイルが無い
+      PermissionError: ファイルを読み書きする権限がない
+      UnicodeDecodeError: 文字コードがあっていない
+      json.JSOUNDecodeError: ファイルの破損、フォーマットが不正
+    """
+    with open(path,"r",encoding="utf-8") as f:
+        data=json.load(f)
+    return data
