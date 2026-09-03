@@ -1,29 +1,173 @@
 {
-    "catan": {
-	"title": "カタン",
-	"img_path": "images/catan.webp",
-	"genre": ["拡大再生産","交渉"],
-	"min_players": 3,
-	"max_players": 4,
-	"min_play_time": 60,
-	"max_play_time": 90
-    },
-    "lovecraft_letter": {
-	"title": "ラブクラフトレター",
-	"img_path": "images/lovecraft_letter.webp",
-	"genre": ["手札管理","推理"],
-	"min_players": 2,
-	"max_players": 6,
-	"min_play_time": 5,
-	"max_play_time": 15
-    },
-    "patch_work": {
-	"title": "パッチワーク",
-	"img_path": "images/patch_work.webp",
-	"genre": ["パズル","対戦"],
-	"min_players": 2,
-	"max_players": 2,
-	"min_play_time": 30,
-	"max_play_time": 60
-    }
+  "catan": {
+    "title": "カタン",
+    "img_path": "images/catan.webp",
+    "genre": ["拡大再生産（エンジンビルド）", "交渉・心理戦"],
+    "min_players": 3,
+    "max_players": 4,
+    "min_play_time": 60,
+    "max_play_time": 90
+  },
+  "lovecraft_letter": {
+    "title": "ラブクラフトレター",
+    "img_path": "images/lovecraft_letter.webp",
+    "genre": ["ハンドマネジメント", "推理・ミステリー"],
+    "min_players": 2,
+    "max_players": 6,
+    "min_play_time": 5,
+    "max_play_time": 15
+  },
+  "pandemic": {
+    "title": "パンデミック",
+    "img_path": "images/pandemic.webp",
+    "genre": ["協力", "ハンドマネジメント"],
+    "min_players": 2,
+    "max_players": 4,
+    "min_play_time": 45,
+    "max_play_time": 45
+  },
+  "cascadia": {
+    "title": "カスカディア",
+    "img_path": "images/cascadia.webp",
+    "genre": ["タイル配置", "パズル"],
+    "min_players": 1,
+    "max_players": 4,
+    "min_play_time": 30,
+    "max_play_time": 45
+  },
+  "century_new_world": {
+    "title": "センチュリー：ニューワールド",
+    "img_path": "images/century_new_world.webp",
+    "genre": ["拡大再生産（エンジンビルド）", "ハンドマネジメント"],
+    "min_players": 2,
+    "max_players": 5,
+    "min_play_time": 30,
+    "max_play_time": 45
+  },
+  "love_letter": {
+    "title": "ラブレター",
+    "img_path": "images/love_letter.webp",
+    "genre": ["ハンドマネジメント", "推理・ミステリー"],
+    "min_players": 2,
+    "max_players": 4,
+    "min_play_time": 20,
+    "max_play_time": 20
+  },
+  "blood_recall": {
+    "title": "ブラッドリコール",
+    "img_path": "images/blood_recall.webp",
+    "genre": ["デッキ構築・バッグビルディング", "対戦"],
+    "min_players": 1,
+    "max_players": 2,
+    "min_play_time": 20,
+    "max_play_time": 40
+  },
+  "geistes_blitz": {
+    "title": "おばけキャッチ",
+    "img_path": "images/geistes_blitz.webp",
+    "genre": ["アクション・器用さ（バランス系）", "パーティー"],
+    "min_players": 2,
+    "max_players": 8,
+    "min_play_time": 20,
+    "max_play_time": 20
+  },
+  "take_6": {
+    "title": "ニムト",
+    "img_path": "images/take_6.webp",
+    "genre": ["ハンドマネジメント", "プッシュ・ユア・ラック（チキンレース）"],
+    "min_players": 2,
+    "max_players": 10,
+    "min_play_time": 45,
+    "max_play_time": 45
+  },
+  "ito": {
+    "title": "ito",
+    "img_path": "images/ito.webp",
+    "genre": ["協力", "パーティー"],
+    "min_players": 2,
+    "max_players": 8,
+    "min_play_time": 20,
+    "max_play_time": 20
+  },
+  "just_one": {
+    "title": "ジャスト・ワン",
+    "img_path": "images/just_one.webp",
+    "genre": ["協力", "ワード系（言葉遊び）"],
+    "min_players": 3,
+    "max_players": 7,
+    "min_play_time": 20,
+    "max_play_time": 20
+  },
+  "ha_to_iu_game": {
+    "title": "はぁって言うゲーム",
+    "img_path": "images/ha_to_iu_game.webp",
+    "genre": ["パーティー", "交渉・心理戦"],
+    "min_players": 3,
+    "max_players": 8,
+    "min_play_time": 15,
+    "max_play_time": 15
+  },
+  "skull_king": {
+    "title": "スカルキング",
+    "img_path": "images/skull_king.webp",
+    "genre": ["トリックテイキング", "プッシュ・ユア・ラック（チキンレース）"],
+    "min_players": 2,
+    "max_players": 6,
+    "min_play_time": 30,
+    "max_play_time": 45
+  },
+  "fluxx": {
+    "title": "フラックス",
+    "img_path": "images/fluxx.webp",
+    "genre": ["ハンドマネジメント", "パーティー"],
+    "min_players": 2,
+    "max_players": 6,
+    "min_play_time": 10,
+    "max_play_time": 40
+  },
+  "sea_turtle_soup": {
+    "title": "ウミガメのスープ",
+    "img_path": "images/sea_turtle_soup.webp",
+    "genre": ["推理・ミステリー", "パーティー"],
+    "min_players": 2,
+    "max_players": 8,
+    "min_play_time": 15,
+    "max_play_time": 30
+  },
+  "the_resistance_avalon": {
+    "title": "レジスタンス：アヴァロン",
+    "img_path": "images/the_resistance_avalon.webp",
+    "genre": ["正体隠匿（人狼系）", "交渉・心理戦"],
+    "min_players": 5,
+    "max_players": 10,
+    "min_play_time": 30,
+    "max_play_time": 30
+  },
+  "shadow_raiders": {
+    "title": "シャドウレイダーズ",
+    "img_path": "images/shadow_raiders.webp",
+    "genre": ["正体隠匿（人狼系）", "チーム戦"],
+    "min_players": 4,
+    "max_players": 8,
+    "min_play_time": 30,
+    "max_play_time": 30
+  },
+  "terraforming_mars": {
+    "title": "テラフォーミング・マーズ",
+    "img_path": "images/terraforming_mars.webp",
+    "genre": ["拡大再生産（エンジンビルド）", "ハンドマネジメント"],
+    "min_players": 1,
+    "max_players": 5,
+    "min_play_time": 90,
+    "max_play_time": 120
+  },
+  "topolomemory": {
+    "title": "トポロメモリー",
+    "img_path": "images/topolomemory.webp",
+    "genre": ["パズル", "アクション・器用さ（バランス系）"],
+    "min_players": 2,
+    "max_players": 5,
+    "min_play_time": 10,
+    "max_play_time": 10
+  }
 }
