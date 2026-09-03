@@ -16,5 +16,14 @@
 	"max_players": 6,
 	"min_play_time": 5,
 	"max_play_time": 15
+    },
+    "patch_work": {
+	"title": "パッチワーク",
+	"img_path": "images/patch_work.webp",
+	"genre": ["パズル","対戦"],
+	"min_players": 2,
+	"max_players": 2,
+	"min_play_time": 30,
+	"max_play_time": 60
     }
 }
