@@ -3,7 +3,6 @@
 ジャンル、プレイ人数、プレイ時間をもとにボードゲーム一覧から絞り込み検索を行う。
 
 Todo:
-  - 複数ジャンルでの検索を可能に(and,orの設定も可能にする？)
   - ジャンルを適切なものに設定
 """
 import json
@@ -23,14 +22,14 @@ def write_datas(path:str, add_id:str, add_data:dict[str, Any]) -> None:
     with open(path,"w",encoding = "utf-8") as f:
         json.dump(datas, f, ensure_ascii = False, indent=4)
 
-def game_filter(datas:dict[str, dict[str, Any]], genre:str | None, players:int | None, play_time:int) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def game_filter(datas:dict[str, dict[str, Any]], genre:list[str] | None, players:int | None, play_time:int) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """条件によってゲームを絞り込む"""
     if genre is None and players is None and play_time == 0:
         return list(datas.values()), []
     perfect = []
     good = []
     for data in datas.values():
-        if genre is not None and genre not in data["genre"]:
+        if genre is not None and not(set(genre) <= set(data["genre"])):
             continue
         if players is not None:
             if not (data["min_players"] <= players <= data["max_players"]):
@@ -44,9 +43,9 @@ def game_filter(datas:dict[str, dict[str, Any]], genre:str | None, players:int |
             perfect.append(data)
     return perfect, good
 
-def input_to_search() -> tuple[str | None, int | None, int]:
+def input_to_search() -> tuple[list[str], int | None, int]:
     """ゲームの絞り込みをするための条件(ジャンル、プレイ人数、プレイ時間)入力"""
-    genre = st.selectbox("ジャンルを選んでください",[None,"協力","対戦","パズル","運"])
+    genre = st.multiselect("ジャンルを選んでください",["協力","対戦","パズル","運"])
     players  = st.selectbox("プレイ人数を選択してください(人)", [None]+list(range(1,21)))
     play_time = st.slider("プレイ時間を選択してください(分)", 0, 240, 0)
     return genre, players, play_time
@@ -72,6 +71,9 @@ def main():
 
     st.title("ボードゲーム検索アプリ")
     genre, players, play_time = input_to_search()
+
+    if not genre:
+        genre = None
 
     perfect, good = game_filter(datas, genre, players, play_time)
 
