@@ -21,32 +21,22 @@ def write_datas(path:str, add_id:str, add_data:dict[str, Any]) -> None:
 
 def game_filter(datas:dict[str, dict[str, Any]], genre:str | None, players:int | None, play_time:int) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """条件によってゲームを絞り込む"""
-    perfect=[] #max<条件
-    good=[] #min<条件
-    for id,data in datas.items():
-        judge=0
-        if genre!=None:
-            if genre  not in data["genre"]:
+    if genre is None and players is None and play_time == 0:
+        return list(datas.values()), []
+    perfect = []
+    good = []
+    for data in datas.values():
+        if genre is not None and genre not in data["genre"]:
+            continue
+        if players is not None:
+            if not (data["min_players"] <= players <= data["max_players"]):
                 continue
+        if play_time != 0:
+            if play_time >= data["max_play_time"]:
+                perfect.append(data)
+            elif play_time >= data["min_play_time"]:
+                good.append(data)
         else:
-            judge-=1
-        if players!=None:
-            if data["min_players"] <= players <= data["max_players"]:
-                judge+=1
-        else:
-            judge-=1
-        if play_time!=0:
-            if play_time>=data["max_play_time"]:
-                judge+=100
-            elif play_time>=data["min_play_time"]:
-                judge+=10
-        else:
-            judge-=1
-        if judge//100==1 and judge%100==1:
-            perfect.append(data)
-        elif judge//10==1 and judge%10==1:
-            good.append(data)
-        if judge == -3:
             perfect.append(data)
     return perfect, good
 
@@ -68,7 +58,7 @@ def display(data:dict[str, Any]) -> None:
         if os.path.isfile(data["img_path"]):
             st.image(data["img_path"], caption = data["title"], width=300)
         else:
-            st.write(f"{data["img_path"]}が存在しません")
+            st.write(f"{data['img_path']}が存在しません")
         st.write(f"{data['min_players']} ~ {data['max_players']} 人")
         st.write(f"{data['min_play_time']} ~ {data['max_play_time']} 分")
 
