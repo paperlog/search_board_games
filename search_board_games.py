@@ -22,7 +22,7 @@ def write_datas(path:str, add_id:str, add_data:dict[str, Any]) -> None:
     with open(path,"w",encoding = "utf-8") as f:
         json.dump(datas, f, ensure_ascii = False, indent=4)
 
-def game_filter(datas:dict[str, dict[str, Any]], genre:str, players:int, play_time:int) -> dict[str, list[dict[str, Any]]]:
+def game_filter(datas:dict[str, dict[str, Any]], genre:str | None, players:int | None, play_time:int) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """条件によってゲームを絞り込む"""
     perfect=[] #max<条件
     good=[] #min<条件
@@ -34,7 +34,7 @@ def game_filter(datas:dict[str, dict[str, Any]], genre:str, players:int, play_ti
         if players!=None:
             if data["min_players"] <= players <= data["max_players"]:
                 judge+=1
-        if play_time!=None:
+        if play_time!=0:
             if play_time>=data["max_play_time"]:
                 judge+=100
             elif play_time>=data["min_play_time"]:
@@ -43,29 +43,42 @@ def game_filter(datas:dict[str, dict[str, Any]], genre:str, players:int, play_ti
             perfect.append(data)
         elif judge//10==1 and judge%10==1:
             good.append(data)
-    return {"perfect":perfect, "good":good}
+    return perfect, good
 
-def input_to_search() -> dict[str, Any]:
+def input_to_search() -> tuple[str | None, int | None, int]:
     """ゲームの絞り込みをするための条件(ジャンル、プレイ人数、プレイ時間)入力"""
     with st.form("is"):
         genre = st.selectbox("ジャンルを選んでください",[None,"協力","対戦","パズル","運"])
         players  = st.selectbox("プレイ人数を選択してください(人)", [None]+list(range(1,21)))
-        play_time = st.slider("プレイ時間を選択してください(分)", 0, 240, None)
+        play_time = st.slider("プレイ時間を選択してください(分)", 0, 240, 0)
         if st.form_submit_button("送信"):
-            return {"genre":genre, "players":players, "play_time":play_time}
+            return genre, players, play_time
+        else:
+            return None, None, 0
 
-def display(datas:dict[str, dict[str, Any]]) -> None:
+def display(data:dict[str, Any]) -> None:
     """データの表示、テスト用で画像表示なし"""
-    for inf in datas.values():
-        print(inf["title"])
-        print(f"{inf['min_players']} ~ {inf['max_players']} 人")
-        print(f"{inf['min_play_time']} ~ {inf['max_play_time']} 分")
-        print()
+    st.write(data["title"])
+    st.image(data["img_path"], caption = data["title"], width=300)
+    st.write(f"{data['min_players']} ~ {data['max_players']} 人")
+    st.write(f"{data['min_play_time']} ~ {data['max_play_time']} 分")
 
 def main():
+    """全体の処理"""
+    
+    path = "data.json"
+    datas = load_datas(path)
+
     st.title("ボードゲーム検索アプリ")
-    condition = input_to_search()
-    st.write(condition)
+    genre, players, play_time = input_to_search()
+
+    perfect, good = game_filter(datas, genre, players, play_time)
+    for i in perfect:
+        st.text("perfect match")
+        display(i)
+    for i in good:
+        st.text("good match")
+        display(i)
 
 if __name__ == "__main__":
     main()
