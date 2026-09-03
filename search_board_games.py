@@ -1,9 +1,6 @@
 """ボードゲーム条件絞り込み検索モジュール
 
 ジャンル、プレイ人数、プレイ時間をもとにボードゲーム一覧から絞り込み検索を行う。
-
-Todo:
-  - ジャンルを適切なものに設定
 """
 import json
 import streamlit as st
@@ -45,7 +42,9 @@ def game_filter(datas:dict[str, dict[str, Any]], genre:list[str] | None, players
 
 def input_to_search() -> tuple[list[str], int | None, int]:
     """ゲームの絞り込みをするための条件(ジャンル、プレイ人数、プレイ時間)入力"""
-    genre = st.multiselect("ジャンルを選んでください",["協力","対戦","パズル","運"])
+    genre_path = "genre.json"
+    genre_list = load_datas(genre_path)
+    genre = st.multiselect("ジャンルを選んでください",genre_list["genre_list"])
     players  = st.selectbox("プレイ人数を選択してください(人)", [None]+list(range(1,21)))
     play_time = st.slider("プレイ時間を選択してください(分)", 0, 240, 0)
     return genre, players, play_time
