@@ -3,7 +3,6 @@
 ジャンル、プレイ人数、プレイ時間をもとにボードゲーム一覧から絞り込み検索を行う。
 """
 import json
-from pathlib import Path
 import streamlit as st
 import os
 
