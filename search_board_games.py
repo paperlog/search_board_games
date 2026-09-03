@@ -1,13 +1,11 @@
 """ボードゲーム条件絞り込み検索モジュール
 
 ジャンル、プレイ人数、プレイ時間をもとにボードゲーム一覧から絞り込み検索を行う。
-
-Todo:
-  - ジャンル、プレイ人数、プレイ時間の入力
 """
 import json
 from pathlib import Path
 import streamlit as st
+import os
 
 def load_datas(path:str) -> dict[str, dict[str, Any]]:
     """jsonファイルからデータを読み込む"""
@@ -58,10 +56,14 @@ def input_to_search() -> tuple[str | None, int | None, int]:
 
 def display(data:dict[str, Any]) -> None:
     """データの表示、テスト用で画像表示なし"""
-    st.write(data["title"])
-    st.image(data["img_path"], caption = data["title"], width=300)
-    st.write(f"{data['min_players']} ~ {data['max_players']} 人")
-    st.write(f"{data['min_play_time']} ~ {data['max_play_time']} 分")
+    with st.form("display"):
+        st.write(data["title"])
+        if os.path.isfile(data["img_path"]):
+            st.image(data["img_path"], caption = data["title"], width=300)
+        else:
+            st.write(f"{data["img_path"]}が存在しません")
+        st.write(f"{data['min_players']} ~ {data['max_players']} 人")
+        st.write(f"{data['min_play_time']} ~ {data['max_play_time']} 分")
 
 def main():
     """全体の処理"""
