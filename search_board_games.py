@@ -29,18 +29,26 @@ def game_filter(datas:dict[str, dict[str, Any]], genre:str | None, players:int |
         if genre!=None:
             if genre  not in data["genre"]:
                 continue
+        else:
+            judge-=1
         if players!=None:
             if data["min_players"] <= players <= data["max_players"]:
                 judge+=1
+        else:
+            judge-=1
         if play_time!=0:
             if play_time>=data["max_play_time"]:
                 judge+=100
             elif play_time>=data["min_play_time"]:
                 judge+=10
+        else:
+            judge-=1
         if judge//100==1 and judge%100==1:
             perfect.append(data)
         elif judge//10==1 and judge%10==1:
             good.append(data)
+        if judge == -3:
+            perfect.append(data)
     return perfect, good
 
 def input_to_search() -> tuple[str | None, int | None, int]:
@@ -56,7 +64,7 @@ def input_to_search() -> tuple[str | None, int | None, int]:
 
 def display(data:dict[str, Any]) -> None:
     """データの表示、テスト用で画像表示なし"""
-    with st.form("display"):
+    with st.container(border=True):
         st.write(data["title"])
         if os.path.isfile(data["img_path"]):
             st.image(data["img_path"], caption = data["title"], width=300)
@@ -69,6 +77,8 @@ def main():
     """全体の処理"""
     
     path = "data.json"
+    if not os.path.isfile(path):
+        st.write("JSONファイル（ゲーム情報があるファイル）が存在しません")
     datas = load_datas(path)
 
     st.title("ボードゲーム検索アプリ")
@@ -76,7 +86,7 @@ def main():
 
     perfect, good = game_filter(datas, genre, players, play_time)
     for i in perfect:
-        st.text("perfect match")
+        st.text("perfect matchh")
         display(i)
     for i in good:
         st.text("good match")
