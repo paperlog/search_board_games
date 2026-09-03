@@ -57,6 +57,7 @@ def display(data:dict[str, Any]) -> None:
             st.image(data["img_path"], caption = data["title"], width=300)
         else:
             st.write(f"{data['img_path']}が存在しません")
+        st.write(data["genre"])
         st.write(f"{data['min_players']} ~ {data['max_players']} 人")
         st.write(f"{data['min_play_time']} ~ {data['max_play_time']} 分")
 
@@ -79,12 +80,15 @@ def main():
     if (genre is not None or players is not None or play_time != 0) and not perfect and not good:
         st.write("条件に一致するゲームはありません")
     else:
+        st.divider()
         for i in perfect:
             st.text("perfect matchh")
             display(i)
+        st.divider()
         for i in good:
             st.text("good match")
             display(i)
+        st.divider()
 
 if __name__ == "__main__":
     main()
