@@ -46,14 +46,10 @@ def game_filter(datas:dict[str, dict[str, Any]], genre:str | None, players:int |
 
 def input_to_search() -> tuple[str | None, int | None, int]:
     """ゲームの絞り込みをするための条件(ジャンル、プレイ人数、プレイ時間)入力"""
-    with st.form("is"):
-        genre = st.selectbox("ジャンルを選んでください",[None,"協力","対戦","パズル","運"])
-        players  = st.selectbox("プレイ人数を選択してください(人)", [None]+list(range(1,21)))
-        play_time = st.slider("プレイ時間を選択してください(分)", 0, 240, 0)
-        if st.form_submit_button("送信"):
-            return genre, players, play_time
-        else:
-            return None, None, 0
+    genre = st.selectbox("ジャンルを選んでください",[None,"協力","対戦","パズル","運"])
+    players  = st.selectbox("プレイ人数を選択してください(人)", [None]+list(range(1,21)))
+    play_time = st.slider("プレイ時間を選択してください(分)", 0, 240, 0)
+    return genre, players, play_time
 
 def display(data:dict[str, Any]) -> None:
     """データの表示、テスト用で画像表示なし"""
@@ -78,12 +74,16 @@ def main():
     genre, players, play_time = input_to_search()
 
     perfect, good = game_filter(datas, genre, players, play_time)
-    for i in perfect:
-        st.text("perfect matchh")
-        display(i)
-    for i in good:
-        st.text("good match")
-        display(i)
+
+    if (genre is not None or players is not None or play_time != 0) and not perfect and not good:
+        st.write("条件に一致するゲームはありません")
+    else:
+        for i in perfect:
+            st.text("perfect matchh")
+            display(i)
+        for i in good:
+            st.text("good match")
+            display(i)
 
 if __name__ == "__main__":
     main()
